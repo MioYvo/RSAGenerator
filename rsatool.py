@@ -2,15 +2,21 @@ import base64
 from pathlib import Path
 from datetime import datetime
 
-from typing import Union
-from Crypto.PublicKey import RSA
-from Crypto.Random import get_random_bytes
-from Crypto.Cipher import PKCS1_OAEP, PKCS1_v1_5
 import click
+from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_OAEP, PKCS1_v1_5
+
+
+cipher_select = {
+    "PKCS1_v1_5": PKCS1_v1_5,
+    "PKCS1_OAEP": PKCS1_OAEP
+}
+
 
 @click.group()
 def cli():
     pass
+
 
 @cli.command()
 @click.option("--out_pubk_filename", default='public.pem', type=click.Path(), show_default=True, help='public key filename to saved in current dir')
@@ -31,9 +37,10 @@ def generate(out_pubk_filename, out_prik_filename, backup):
     with open(out_pubk_filename, 'wb') as f:
         f.write(public_key)
 
+
 @cli.command()
-@click.option("--input_filename", default='data', type=click.Path(), show_default=True)
-@click.option('--out_filename', default='encrypted_data', type=click.Path(), show_default=True)
+@click.option("--input_filename", default='data.txt', type=click.Path(), show_default=True)
+@click.option('--out_filename', default='encrypted_data.txt', type=click.Path(), show_default=True)
 @click.option('--cipher', default='PKCS1_v1_5', type=click.Choice(['PKCS1_v1_5', 'PKCS1_OAEP'], case_sensitive=False), show_default=True)
 def encrypt(input_filename, out_filename, cipher):
     with open(input_filename, 'rb') as input:
@@ -41,10 +48,6 @@ def encrypt(input_filename, out_filename, cipher):
         with open("public.pem") as f:
             publick_key = RSA.import_key(f.read())
         
-        cipher_select = {
-            "PKCS1_v1_5": PKCS1_v1_5,
-            "PKCS1_OAEP": PKCS1_OAEP
-        }
         cipher = cipher_select[cipher].new(publick_key)
         ciphertext = cipher.encrypt(data)
 
@@ -53,8 +56,8 @@ def encrypt(input_filename, out_filename, cipher):
 
 
 @cli.command()
-@click.option("--input_filename", default='encrypted_data', type=click.Path(), show_default=True)
-@click.option('--out_filename', default='decrypted_data', type=click.Path(), show_default=True)
+@click.option("--input_filename", default='encrypted_data.txt', type=click.Path(), show_default=True)
+@click.option('--out_filename', default='decrypted_data.txt', type=click.Path(), show_default=True)
 @click.option('--cipher', default='PKCS1_v1_5', type=click.Choice(['PKCS1_v1_5', 'PKCS1_OAEP'], case_sensitive=False), show_default=True)
 def decrypt(input_filename, out_filename, cipher):
     with open(input_filename, 'rb') as input:
@@ -65,10 +68,6 @@ def decrypt(input_filename, out_filename, cipher):
         with open("private.pem") as f:
             private_key = RSA.import_key(f.read())
 
-        cipher_select = {
-            "PKCS1_v1_5": PKCS1_v1_5,
-            "PKCS1_OAEP": PKCS1_OAEP
-        }
         _cipher = cipher_select[cipher].new(private_key)
         if cipher == 'PKCS1_v1_5':
             args = (data, True)
