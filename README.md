@@ -3,11 +3,11 @@
 A tools to generate rsa keys, encrypt and decrypt message.
 
 ## Usage
-1. generate
+1. Command `generate`: 
    Generate rsa keys, will generate `public.pem` and `private.pem` in **current dir**.
-2. encrypt
+2. Command `encrypt`: 
    Encrypt message, will read `public.pem`, `DATA` file and create `encrypted_data` in **current dir**
-3. decrypt
+3. Command `decrypt`: 
    Decrypt message, will read `private.pem`, `encrypted_data` and create `decrypted_data` file in **current dir**.
 
 ### Windows
