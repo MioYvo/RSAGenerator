@@ -2,6 +2,8 @@
 
 A tools to generate rsa keys, encrypt and decrypt message.
 
+[中文说明](ZH-README.md)
+
 ## Usage
 1. Command `generate`: 
    Generate rsa keys, will generate `public.pem` and `private.pem` in **current dir**.
@@ -52,6 +54,12 @@ Currently rsatool can only run in Windows Powershell or Windows Ternimal. No GUI
     ![](docs/type_in.png)
 
 
+
+# For development
+## Package codes to exe
+```
+pyinstaller rsatool.py -F
+```
 
 
 
