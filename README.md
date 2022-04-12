@@ -3,8 +3,16 @@
 A tools to generate rsa keys, encrypt and decrypt message.
 
 ## Usage
-* Windows
+1. generate
+   Generate rsa keys, will generate `public.pem` and `private.pem` in **current dir**.
+2. encrypt
+   Encrypt message, will read `public.pem`, `DATA` file and create `encrypted_data` in **current dir**
+3. decrypt
+   Decrypt message, will read `private.pem`, `encrypted_data` and create `decrypted_data` file in **current dir**.
+
+### Windows
 > You need download rsatool.exe from [Releases](https://github.com/MioYvo/RSAGenerator/releases) page.
+Currently rsatool can only run in Windows Powershell or Windows Ternimal. No GUI.
 
 1. Find and open your `rsatools.exe` folder ![](docs/d_folder.png).
 2. Open Windows terminal or Windows PowerShell. 
@@ -20,6 +28,7 @@ A tools to generate rsa keys, encrypt and decrypt message.
     ```
 
     ```
+    # On default settings, you need put your message(to encypted) in a plain text file named "DATA" with NO suffix.
     rsatools.exe encrypt
     ```
 
