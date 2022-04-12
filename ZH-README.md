@@ -10,7 +10,7 @@ RSAGenerator是一个RSA**命令行**小工具可以生成rsa公钥私钥对，�
    解密文本，会读取**当前目录**的`private.pem`和`encrypted_data`文件，创建解密后原文的 `decrypted_data`文件。
 
 ### Windows用户
-> 请现在[Releases](https://github.com/MioYvo/RSAGenerator/releases) 页面下载`rsatool.exe`可执行文件.
+> 请先在[Releases](https://github.com/MioYvo/RSAGenerator/releases) 页面下载`rsatool.exe`可执行文件.
 目前rsatool仅发布了windows平台的exe文件。没有GUI。
 1. 执行前请先关闭*腾讯电脑管家*等流氓软件。
 2. 找到并打开 `rsatools.exe` 所在目录 ![](docs/d_folder.png).
